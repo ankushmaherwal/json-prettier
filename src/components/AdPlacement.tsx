@@ -11,10 +11,6 @@ interface AdPlacementProps {
 
 export const AdPlacement = ({ position, config, className = '' }: AdPlacementProps) => {
   const adSenseConfig = getAdSenseConfig();
-  
-  if (!config.ads[position]) {
-    return null;
-  }
 
   useEffect(() => {
     // Load AdSense script if not already loaded
@@ -26,6 +22,10 @@ export const AdPlacement = ({ position, config, className = '' }: AdPlacementPro
       document.head.appendChild(script);
     }
   }, [adSenseConfig.clientId]);
+  
+  if (!config.ads[position]) {
+    return null;
+  }
 
   const getAdStyle = () => {
     switch (position) {

@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import type { JSX } from 'react';
 import { CheckCircle, AlertCircle, Copy, Check, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export const JsonParser = () => {
   const [inputJson, setInputJson] = useState('');
-  const [parsedData, setParsedData] = useState<any>(null);
+  const [parsedData, setParsedData] = useState<unknown | null>(null);
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const [error, setError] = useState<string>('');
   const [showTree, setShowTree] = useState(false);
@@ -53,30 +54,15 @@ export const JsonParser = () => {
       setCopied(true);
       toast.success('Parsed data copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };
 
-  const renderValue = (value: any, depth = 0): string => {
-    if (value === null) return 'null';
-    if (typeof value === 'string') return `"${value}"`;
-    if (typeof value === 'number' || typeof value === 'boolean') return String(value);
-    if (Array.isArray(value)) {
-      if (value.length === 0) return '[]';
-      return `Array(${value.length})`;
-    }
-    if (typeof value === 'object') {
-      const keys = Object.keys(value);
-      if (keys.length === 0) return '{}';
-      return `Object(${keys.length} properties)`;
-    }
-    return String(value);
-  };
 
-  const renderTree = (obj: any, depth = 0): JSX.Element => {
+  const renderTree = (obj: unknown, depth = 0): JSX.Element => {
     if (obj === null) return <span className="text-gray-500">null</span>;
-    if (typeof obj === 'string') return <span className="text-green-600">"{obj}"</span>;
+    if (typeof obj === 'string') return <span className="text-green-600">&quot;{obj}&quot;</span>;
     if (typeof obj === 'number') return <span className="text-blue-600">{obj}</span>;
     if (typeof obj === 'boolean') return <span className="text-purple-600">{String(obj)}</span>;
     
@@ -102,8 +88,8 @@ export const JsonParser = () => {
       );
     }
     
-    if (typeof obj === 'object') {
-      const keys = Object.keys(obj);
+    if (typeof obj === 'object' && obj !== null) {
+      const keys = Object.keys(obj as Record<string, unknown>);
       return (
         <div className="ml-4">
           <span className="text-gray-600">{'{'}</span>
@@ -113,8 +99,8 @@ export const JsonParser = () => {
             <div className="ml-4">
               {keys.map((key, index) => (
                 <div key={key} className="flex items-start">
-                  <span className="text-red-600 mr-2">"{key}":</span>
-                  {renderTree(obj[key], depth + 1)}
+                  <span className="text-red-600 mr-2">&quot;{key}&quot;:</span>
+                  {renderTree((obj as Record<string, unknown>)[key], depth + 1)}
                   {index < keys.length - 1 && <span className="text-gray-600">,</span>}
                 </div>
               ))}
@@ -156,7 +142,7 @@ export const JsonParser = () => {
           Clear All
         </button>
         
-        {parsedData && (
+        {parsedData !== null && (
           <button
             onClick={copyParsedData}
             className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
@@ -166,7 +152,7 @@ export const JsonParser = () => {
           </button>
         )}
         
-        {parsedData && (
+        {parsedData !== null && (
           <button
             onClick={() => setShowTree(!showTree)}
             className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
@@ -214,7 +200,7 @@ export const JsonParser = () => {
       )}
 
       {/* Parsed Data Display */}
-      {parsedData && (
+      {parsedData !== null && (
         <div className="space-y-4">
           <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
             <div className="flex items-center gap-2">
@@ -250,7 +236,7 @@ export const JsonParser = () => {
       )}
 
       {/* Data Statistics */}
-      {parsedData && (
+      {parsedData !== null && (
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
           <h3 className="text-sm font-medium text-gray-700 mb-2">Data Statistics</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
@@ -263,7 +249,9 @@ export const JsonParser = () => {
               <span className="ml-2 font-medium">
                 {Array.isArray(parsedData) 
                   ? `${parsedData.length} items`
-                  : `${Object.keys(parsedData).length} properties`
+                  : typeof parsedData === 'object' && parsedData !== null
+                    ? `${Object.keys(parsedData as Record<string, unknown>).length} properties`
+                    : '1 item'
                 }
               </span>
             </div>

@@ -54,7 +54,7 @@ export const JsonValidator = () => {
       setCopied(true);
       toast.success('Valid JSON copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };
