@@ -1,0 +1,53 @@
+{
+  "pages": {
+    "/": {
+      "ads": {
+        "top": true,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "title": "JSON Formatter / Prettifier",
+      "description": "Beautify, validate, and format your JSON data instantly. Free online tool with no registration required."
+    },
+    "/json-validator": {
+      "ads": {
+        "top": true,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "title": "JSON Validator",
+      "description": "Validate your JSON data instantly. Check for syntax errors and ensure your JSON is properly formatted."
+    },
+    "/json-parser": {
+      "ads": {
+        "top": true,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "title": "JSON Parser",
+      "description": "Parse and visualize your JSON data. View the structure and hierarchy of your JSON objects."
+    },
+    "/json-minifier": {
+      "ads": {
+        "top": true,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "title": "JSON Minifier",
+      "description": "Minify your JSON data by removing unnecessary whitespace. Reduce file size while maintaining functionality."
+    }
+  },
+  "global": {
+    "ads": {
+      "top": true,
+      "bottom": true,
+      "left": false,
+      "right": false
+    }
+  }
+}
+
