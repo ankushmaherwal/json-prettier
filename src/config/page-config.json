@@ -2,8 +2,8 @@
   "pages": {
     "/": {
       "ads": {
-        "top": true,
-        "bottom": true,
+        "top": false,
+        "bottom": false,
         "left": false,
         "right": false
       },
@@ -12,8 +12,8 @@
     },
     "/json-validator": {
       "ads": {
-        "top": true,
-        "bottom": true,
+        "top": false,
+        "bottom": false,
         "left": false,
         "right": false
       },
@@ -22,8 +22,8 @@
     },
     "/json-parser": {
       "ads": {
-        "top": true,
-        "bottom": true,
+        "top": false,
+        "bottom": false,
         "left": false,
         "right": false
       },
@@ -32,8 +32,8 @@
     },
     "/json-minifier": {
       "ads": {
-        "top": true,
-        "bottom": true,
+        "top": false,
+        "bottom": false,
         "left": false,
         "right": false
       },
@@ -43,8 +43,8 @@
   },
   "global": {
     "ads": {
-      "top": true,
-      "bottom": true,
+      "top": false,
+      "bottom": false,
       "left": false,
       "right": false
     }
