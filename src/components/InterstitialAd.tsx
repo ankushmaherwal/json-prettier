@@ -1,11 +1,27 @@
 'use client';
 
+import { getAdSenseConfig } from '@/lib/ads-config';
+import { useEffect } from 'react';
+
 interface InterstitialAdProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 export const InterstitialAd = ({ isOpen, onClose }: InterstitialAdProps) => {
+  const adSenseConfig = getAdSenseConfig();
+
+  useEffect(() => {
+    // Load AdSense script if not already loaded
+    if (typeof window !== 'undefined' && adSenseConfig.clientId && isOpen) {
+      const script = document.createElement('script');
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseConfig.clientId}`;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+    }
+  }, [adSenseConfig.clientId, isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -22,7 +38,18 @@ export const InterstitialAd = ({ isOpen, onClose }: InterstitialAdProps) => {
         <div className="text-center">
           <h3 className="text-xl font-bold mb-4">Advertisement</h3>
           <div className="w-full h-64 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mb-4">
-            <span className="text-gray-500">Ad Space</span>
+            {adSenseConfig.clientId ? (
+              <ins
+                className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client={adSenseConfig.clientId}
+                data-ad-slot={adSenseConfig.slots.top}
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              />
+            ) : (
+              <span className="text-gray-500">Ad Space</span>
+            )}
           </div>
           <p className="text-sm text-gray-600 mb-4">
             This ad helps keep our service free for everyone.

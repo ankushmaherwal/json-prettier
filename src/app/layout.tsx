@@ -18,14 +18,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://json-tools.example.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'JSON Formatter / Prettifier Online Tool',
     description: 'Instantly format, validate, and beautify JSON online with this free tool.',
-    url: 'https://json-tools.example.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com',
     siteName: 'JSON Formatter / Prettifier',
     images: [
       {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'your-google-verification-code',
   },
 };
 
@@ -76,7 +76,7 @@ export default function RootLayout({
               '@type': 'WebApplication',
               name: 'JSON Formatter / Prettifier',
               description: 'Free online JSON Formatter / Prettifier tool. Beautify, validate, minify, and parse JSON instantly.',
-              url: 'https://json-tools.example.com',
+              url: process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com',
               applicationCategory: 'DeveloperApplication',
               operatingSystem: 'Any',
               offers: {
@@ -110,7 +110,7 @@ export default function RootLayout({
             },
           }}
         />
-        <GoogleAnalytics gaId="G-XXXXXXXXXX" />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
       </body>
     </html>
   );

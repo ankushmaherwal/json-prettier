@@ -9,6 +9,28 @@ export interface AdConfig {
   };
 }
 
+export interface AdSenseConfig {
+  clientId: string;
+  slots: {
+    top: string;
+    bottom: string;
+    left: string;
+    right: string;
+  };
+}
+
+export const getAdSenseConfig = (): AdSenseConfig => {
+  return {
+    clientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || '',
+    slots: {
+      top: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP || '',
+      bottom: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM || '',
+      left: process.env.NEXT_PUBLIC_ADSENSE_SLOT_LEFT || '',
+      right: process.env.NEXT_PUBLIC_ADSENSE_SLOT_RIGHT || '',
+    },
+  };
+};
+
 export const defaultAdConfig: AdConfig = {
   ads: {
     top: true,

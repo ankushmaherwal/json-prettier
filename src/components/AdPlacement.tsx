@@ -1,6 +1,7 @@
 'use client';
 
-import { AdConfig } from '@/lib/ads-config';
+import { AdConfig, getAdSenseConfig } from '@/lib/ads-config';
+import { useEffect } from 'react';
 
 interface AdPlacementProps {
   position: 'top' | 'bottom' | 'left' | 'right';
@@ -9,9 +10,22 @@ interface AdPlacementProps {
 }
 
 export const AdPlacement = ({ position, config, className = '' }: AdPlacementProps) => {
+  const adSenseConfig = getAdSenseConfig();
+  
   if (!config.ads[position]) {
     return null;
   }
+
+  useEffect(() => {
+    // Load AdSense script if not already loaded
+    if (typeof window !== 'undefined' && adSenseConfig.clientId) {
+      const script = document.createElement('script');
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseConfig.clientId}`;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
+    }
+  }, [adSenseConfig.clientId]);
 
   const getAdStyle = () => {
     switch (position) {
@@ -28,14 +42,29 @@ export const AdPlacement = ({ position, config, className = '' }: AdPlacementPro
     }
   };
 
+  const getAdSlotId = () => {
+    return adSenseConfig.slots[position] || '';
+  };
+
   return (
     <div className={`${getAdStyle()} ${className}`}>
-      <div className="text-gray-500 text-sm">
-        {position === 'top' && 'Advertisement'}
-        {position === 'bottom' && 'Advertisement'}
-        {position === 'left' && 'Ad'}
-        {position === 'right' && 'Ad'}
-      </div>
+      {adSenseConfig.clientId && getAdSlotId() ? (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client={adSenseConfig.clientId}
+          data-ad-slot={getAdSlotId()}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      ) : (
+        <div className="text-gray-500 text-sm">
+          {position === 'top' && 'Advertisement'}
+          {position === 'bottom' && 'Advertisement'}
+          {position === 'left' && 'Ad'}
+          {position === 'right' && 'Ad'}
+        </div>
+      )}
     </div>
   );
 };
