@@ -111,10 +111,10 @@ export default function RootLayout({
             },
           }}
         />
-        <GoogleAnalytics gaId={"G-TWMBB9XHR3" || process.env.NEXT_PUBLIC_GA_ID} />
+        <GoogleAnalytics gaId={"G-TWMBB9XHR3"} />
         {/* Manual Google Analytics script as requested by Google */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${"G-TWMBB9XHR3" || process.env.NEXT_PUBLIC_GA_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${"G-TWMBB9XHR3"}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -122,7 +122,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${"G-TWMBB9XHR3" || process.env.NEXT_PUBLIC_GA_ID}');
+            gtag('config', '${"G-TWMBB9XHR3"}');
           `}
         </Script>
       </body>
