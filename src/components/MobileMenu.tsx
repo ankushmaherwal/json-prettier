@@ -18,6 +18,11 @@ export const MobileMenu = ({ currentPage = '/' }: MobileMenuProps) => {
     { href: '/json-minifier', label: 'JSON Minifier', isActive: currentPage === '/json-minifier' },
   ];
 
+  const companyItems = [
+    { href: '/about-us', label: 'About Us', isActive: currentPage === '/about-us' },
+    { href: '/contact-us', label: 'Contact Us', isActive: currentPage === '/contact-us' },
+  ];
+
   return (
     <>
       {/* Mobile menu button */}
@@ -53,23 +58,49 @@ export const MobileMenu = ({ currentPage = '/' }: MobileMenuProps) => {
             </div>
             
             <nav className="p-6">
-              <ul className="space-y-1">
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                        item.isActive
-                          ? 'text-blue-600 bg-blue-100'
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-white'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Tools</h3>
+                  <ul className="space-y-1">
+                    {navItems.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                            item.isActive
+                              ? 'text-blue-600 bg-blue-100'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Company</h3>
+                  <ul className="space-y-1">
+                    {companyItems.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                            item.isActive
+                              ? 'text-blue-600 bg-blue-100'
+                              : 'text-gray-600 hover:text-gray-900 hover:bg-white'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </nav>
           </div>
         </div>
