@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ''),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'JSON Formatter / Prettifier Online Tool',
     description: 'Instantly format, validate, and beautify JSON online with this free tool.',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: 'JSON Formatter / Prettifier',
     images: [
       {
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'your-google-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
@@ -69,6 +69,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google AdSense Script */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -77,7 +85,7 @@ export default function RootLayout({
               '@type': 'WebApplication',
               name: 'JSON Formatter / Prettifier',
               description: 'Free online JSON Formatter / Prettifier tool. Beautify, validate, minify, and parse JSON instantly.',
-              url: process.env.NEXT_PUBLIC_SITE_URL || 'https://json-tools.example.com',
+              url: process.env.NEXT_PUBLIC_SITE_URL || '',
               applicationCategory: 'DeveloperApplication',
               operatingSystem: 'Any',
               offers: {
@@ -111,10 +119,10 @@ export default function RootLayout({
             },
           }}
         />
-        <GoogleAnalytics gaId={"G-TWMBB9XHR3"} />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         {/* Manual Google Analytics script as requested by Google */}
         <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${"G-TWMBB9XHR3"}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ""}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -122,7 +130,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${"G-TWMBB9XHR3"}');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || ""}');
           `}
         </Script>
       </body>
