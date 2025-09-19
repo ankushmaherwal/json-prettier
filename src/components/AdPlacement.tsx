@@ -1,7 +1,6 @@
 'use client';
 
 import { AdConfig, getAdSenseConfig } from '@/lib/ads-config';
-import { useEffect } from 'react';
 
 interface AdPlacementProps {
   position: 'top' | 'bottom' | 'left' | 'right';
@@ -12,16 +11,8 @@ interface AdPlacementProps {
 export const AdPlacement = ({ position, config, className = '' }: AdPlacementProps) => {
   const adSenseConfig = getAdSenseConfig();
 
-  useEffect(() => {
-    // Load AdSense script if not already loaded
-    if (typeof window !== 'undefined' && adSenseConfig.clientId) {
-      const script = document.createElement('script');
-      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseConfig.clientId}`;
-      script.async = true;
-      script.crossOrigin = 'anonymous';
-      document.head.appendChild(script);
-    }
-  }, [adSenseConfig.clientId]);
+  // AdSense script is loaded globally in layout.tsx
+  // No need to load it again here
   
   if (!config.ads[position]) {
     return null;

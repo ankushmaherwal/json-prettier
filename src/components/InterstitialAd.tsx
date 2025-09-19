@@ -1,7 +1,6 @@
 'use client';
 
 import { getAdSenseConfig } from '@/lib/ads-config';
-import { useEffect } from 'react';
 
 interface InterstitialAdProps {
   isOpen: boolean;
@@ -11,16 +10,8 @@ interface InterstitialAdProps {
 export const InterstitialAd = ({ isOpen, onClose }: InterstitialAdProps) => {
   const adSenseConfig = getAdSenseConfig();
 
-  useEffect(() => {
-    // Load AdSense script if not already loaded
-    if (typeof window !== 'undefined' && adSenseConfig.clientId && isOpen) {
-      const script = document.createElement('script');
-      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseConfig.clientId}`;
-      script.async = true;
-      script.crossOrigin = 'anonymous';
-      document.head.appendChild(script);
-    }
-  }, [adSenseConfig.clientId, isOpen]);
+  // AdSense script is loaded globally in layout.tsx
+  // No need to load it again here
 
   if (!isOpen) return null;
 
