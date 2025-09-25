@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 
 const BEAUTIFY_COUNTER_KEY = 'json-beautify-counter';
-const INTERSTITIAL_THRESHOLD = 5;
+// const INTERSTITIAL_THRESHOLD = 5; // Commented out since popup ads are disabled
 
 export const useBeautifyCounter = () => {
   const [count, setCount] = useState(0);
@@ -23,9 +23,10 @@ export const useBeautifyCounter = () => {
     localStorage.setItem(BEAUTIFY_COUNTER_KEY, newCount.toString());
     
     // Show interstitial ad every 5th request
-    if (newCount % INTERSTITIAL_THRESHOLD === 0) {
-      setShowInterstitial(true);
-    }
+    // COMMENTED OUT: Popup ads functionality disabled for now
+    // if (newCount % INTERSTITIAL_THRESHOLD === 0) {
+    //   setShowInterstitial(true);
+    // }
   };
 
   const closeInterstitial = () => {
