@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle, AlertCircle, Copy, Check } from 'lucide-react';
+import { CheckCircle, AlertCircle, Copy, Check, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export const JsonValidator = () => {
@@ -59,6 +59,24 @@ export const JsonValidator = () => {
     }
   };
 
+  const downloadResult = () => {
+    if (!validationResult?.formatted) {
+      toast.error('No valid JSON to download');
+      return;
+    }
+
+    const blob = new Blob([validationResult.formatted], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'validated.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success('Validated JSON downloaded!');
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center mb-8">
@@ -88,13 +106,23 @@ export const JsonValidator = () => {
         </button>
         
         {validationResult?.isValid && (
-          <button
-            onClick={copyResult}
-            className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
-          >
-            {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-            {copied ? 'Copied!' : 'Copy Valid JSON'}
-          </button>
+          <>
+            <button
+              onClick={copyResult}
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
+            >
+              {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+              {copied ? 'Copied!' : 'Copy Valid JSON'}
+            </button>
+            
+            <button
+              onClick={downloadResult}
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+            >
+              <Download className="w-5 h-5" />
+              Download
+            </button>
+          </>
         )}
       </div>
 

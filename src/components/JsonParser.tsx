@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import type { JSX } from 'react';
-import { CheckCircle, AlertCircle, Copy, Check, Eye, EyeOff } from 'lucide-react';
+import { CheckCircle, AlertCircle, Copy, Check, Eye, EyeOff, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export const JsonParser = () => {
@@ -57,6 +57,25 @@ export const JsonParser = () => {
     } catch {
       toast.error('Failed to copy to clipboard');
     }
+  };
+
+  const downloadParsedData = () => {
+    if (!parsedData) {
+      toast.error('No parsed data to download');
+      return;
+    }
+
+    const jsonString = JSON.stringify(parsedData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'parsed.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success('Parsed JSON downloaded!');
   };
 
 
@@ -143,13 +162,23 @@ export const JsonParser = () => {
         </button>
         
         {parsedData !== null && (
-          <button
-            onClick={copyParsedData}
-            className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
-          >
-            {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-            {copied ? 'Copied!' : 'Copy Parsed Data'}
-          </button>
+          <>
+            <button
+              onClick={copyParsedData}
+              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
+            >
+              {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+              {copied ? 'Copied!' : 'Copy Parsed Data'}
+            </button>
+            
+            <button
+              onClick={downloadParsedData}
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+            >
+              <Download className="w-5 h-5" />
+              Download
+            </button>
+          </>
         )}
         
         {parsedData !== null && (

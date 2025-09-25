@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check, AlertCircle, CheckCircle } from 'lucide-react';
+import { Copy, Check, AlertCircle, CheckCircle, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useBeautifyCounter } from '@/lib/use-beautify-counter';
 import { InterstitialAd } from './InterstitialAd';
@@ -75,6 +75,24 @@ export const JsonPrettifier = () => {
     }
   };
 
+  const downloadOutput = () => {
+    if (!outputJson) {
+      toast.error('No output to download');
+      return;
+    }
+
+    const blob = new Blob([outputJson], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'formatted.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success('Formatted JSON downloaded!');
+  };
+
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -122,6 +140,15 @@ export const JsonPrettifier = () => {
             >
               {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               {copied ? 'Copied!' : 'Copy Output'}
+            </button>
+            
+            <button
+              onClick={downloadOutput}
+              disabled={!outputJson}
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Download className="w-5 h-5" />
+              Download
             </button>
           </div>
 
