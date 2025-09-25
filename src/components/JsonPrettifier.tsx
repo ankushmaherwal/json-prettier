@@ -112,7 +112,7 @@ export const JsonPrettifier = () => {
           <div className="flex flex-wrap gap-4 justify-center mb-6">
             <button
               onClick={beautifyJson}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900 transition-colors font-medium flex items-center gap-2"
             >
               <CheckCircle className="w-5 h-5" />
               Format JSON
@@ -120,7 +120,7 @@ export const JsonPrettifier = () => {
             
             <button
               onClick={validateJson}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition-colors font-medium flex items-center gap-2"
             >
               <AlertCircle className="w-5 h-5" />
               Validate JSON
@@ -136,7 +136,7 @@ export const JsonPrettifier = () => {
             <button
               onClick={copyOutput}
               disabled={!outputJson}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-900 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               {copied ? 'Copied!' : 'Copy Output'}
@@ -145,7 +145,7 @@ export const JsonPrettifier = () => {
             <button
               onClick={downloadOutput}
               disabled={!outputJson}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Download className="w-5 h-5" />
               Download

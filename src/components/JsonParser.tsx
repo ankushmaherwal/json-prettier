@@ -148,7 +148,7 @@ export const JsonParser = () => {
       <div className="flex flex-wrap gap-4 justify-center mb-8">
         <button
           onClick={parseJson}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium flex items-center gap-2"
+          className="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900 transition-colors font-medium flex items-center gap-2"
         >
           <CheckCircle className="w-5 h-5" />
           Parse JSON
@@ -165,7 +165,7 @@ export const JsonParser = () => {
           <>
             <button
               onClick={copyParsedData}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-900 transition-colors font-medium flex items-center gap-2"
             >
               {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               {copied ? 'Copied!' : 'Copy Parsed Data'}
@@ -173,7 +173,7 @@ export const JsonParser = () => {
             
             <button
               onClick={downloadParsedData}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition-colors font-medium flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
               Download
@@ -184,7 +184,7 @@ export const JsonParser = () => {
         {parsedData !== null && (
           <button
             onClick={() => setShowTree(!showTree)}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+            className="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition-colors font-medium flex items-center gap-2"
           >
             {showTree ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             {showTree ? 'Hide Tree' : 'Show Tree'}

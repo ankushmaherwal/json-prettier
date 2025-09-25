@@ -103,7 +103,7 @@ export const JsonMinifier = () => {
       <div className="flex flex-wrap gap-4 justify-center mb-8">
         <button
           onClick={minifyJson}
-          className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors font-medium flex items-center gap-2"
+          className="bg-orange-800 text-white px-6 py-3 rounded-lg hover:bg-orange-900 transition-colors font-medium flex items-center gap-2"
         >
           <Zap className="w-5 h-5" />
           Minify JSON
@@ -120,7 +120,7 @@ export const JsonMinifier = () => {
           <>
             <button
               onClick={copyMinified}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-900 transition-colors font-medium flex items-center gap-2"
             >
               {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               {copied ? 'Copied!' : 'Copy Minified'}
@@ -128,7 +128,7 @@ export const JsonMinifier = () => {
             
             <button
               onClick={downloadMinified}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2"
+              className="bg-green-800 text-white px-6 py-3 rounded-lg hover:bg-green-900 transition-colors font-medium flex items-center gap-2"
             >
               <Download className="w-5 h-5" />
               Download
