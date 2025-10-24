@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { AdsterraAd } from '@/components/AdsterraAd';
 
 export const metadata: Metadata = {
   title: 'About Us - JSON Formatter / Prettifier',
@@ -9,7 +12,13 @@ export const metadata: Metadata = {
 
 export default function AboutUs() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen flex flex-col">
+      <Header currentPage="/about-us" />
+      
+      {/* Adsterra Ad - After Header */}
+      <AdsterraAd />
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           About Us
@@ -115,6 +124,9 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
+      </div>
+      
+      <Footer />
     </div>
   );
 }

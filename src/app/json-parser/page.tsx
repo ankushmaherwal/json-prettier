@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { AdPlacement } from '@/components/AdPlacement';
+import { AdsterraAd } from '@/components/AdsterraAd';
 import { getAdConfig } from '@/lib/ads-config';
 import { JsonParser } from '@/components/JsonParser';
 
@@ -27,6 +28,9 @@ export default function JsonParserPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header currentPage="/json-parser" />
+      
+      {/* Adsterra Ad - After Header */}
+      <AdsterraAd />
       
       {/* Top Ad */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4">

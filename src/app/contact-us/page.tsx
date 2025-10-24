@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { ContactForm } from './ContactForm';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { AdsterraAd } from '@/components/AdsterraAd';
 
 export const metadata: Metadata = {
   title: 'Contact Us - JSON Formatter / Prettifier',
@@ -8,5 +11,16 @@ export const metadata: Metadata = {
 };
 
 export default function ContactUs() {
-  return <ContactForm />;
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header currentPage="/contact-us" />
+      
+      {/* Adsterra Ad - After Header */}
+      <AdsterraAd />
+      
+      <ContactForm />
+      
+      <Footer />
+    </div>
+  );
 }
